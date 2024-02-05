@@ -6,8 +6,8 @@ library(ggsignif)
 library(ggplot2)
 
 ############Bgroup############
-comm<-read.csv("NST\\MBBOTU.csv", header = T,row.names = 1)
-group<-read.csv("NST\\Bgroup.csv", header = T,row.names = 1)
+comm<-read.csv("MBBOTU.csv", header = T,row.names = 1)
+group<-read.csv("Bgroup.csv", header = T,row.names = 1)
 comm<-t(comm)
 
 set.seed(123)
@@ -27,8 +27,8 @@ p_NSTB<-ggboxplot(data = nst_group, x = 'group', y = 'NST.ij.ruzicka', color = '
   theme_bw()+theme(panel.grid=element_blank())
 
 ############Fgroup############
-comm<-read.csv("NST\\FOTU.csv", header = T,row.names = 1)
-group<-read.csv("NST\\Fgroup.csv", header = T,row.names = 1)
+comm<-read.csv("FOTU.csv", header = T,row.names = 1)
+group<-read.csv("Fgroup.csv", header = T,row.names = 1)
 comm<-t(comm)
 
 set.seed(123)
