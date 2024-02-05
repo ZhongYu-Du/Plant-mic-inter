@@ -68,21 +68,11 @@ zipi_plot<- function (node.roles, roles.colors = NULL)
   return(p)
 }
 
-
-##############B_information################
-asv_total<-read.delim("microbial network\\B_otuall.txt")
-asv_total$Phylum<-gsub('p__','',asv_total$Phylum)
-asv_total$Class<-gsub('c__','',asv_total$Class)
-asv_total$Order<-gsub('o__','',asv_total$Order)
-asv_total$Family<-gsub('f__','',asv_total$Family)
-asv_total$Genus<-gsub('g__','',asv_total$Genus)
-asv_total$Species<-gsub('s__','',asv_total$Species)
-
-write.csv(asv_total,file='microbial network\\B_otu.csv')
-taxonomy = read.csv("microbial network\\B_tax.csv", row.names=1,header=T)
-
+setwd()
+##############Bacteria################
 ##############B_M################
-otu_BM = read.csv("microbial network\\B_M.csv", row.names=1,header=T)
+taxonomy = read.csv("B_tax.csv", row.names=1,header=T)
+otu_BM = read.csv("B_M.csv", row.names=1,header=T)
 ps_BM = phyloseq(otu_table(as.matrix(otu_BM), taxa_are_rows=TRUE),tax_table(as.matrix(taxonomy)))
 
 ###############network by phylum###############
@@ -122,8 +112,8 @@ s_t_BM<-distinct(s_t_BM)
 names(s_t_BM)<-'ID'
 nd_BM<-merge(s_t_BM, nodeG_BM,  by= 'ID' , all.x = TRUE )
 
-write.csv(edge_netClu_BM, 'microbial network\\edge_BM.csv', row.names = F)
-write.csv(nd_BM, 'microbial network\\node_BM.csv', row.names = F)
+write.csv(edge_netClu_BM, 'edge_BM.csv', row.names = F)
+write.csv(nd_BM, 'node_BM.csv', row.names = F)
 
 ##############zipi analysis################
 result_zipi_BM = corMicro (ps = ps_BM,
@@ -156,7 +146,7 @@ colnames(rdn_BM)<-c('properties','BM_net','z_mean_BM','z_sd_BM')
 
 
 ##############B_C################
-otu_BC = read.csv("microbial network\\B_C.csv", row.names=1,header=T)
+otu_BC = read.csv("B_C.csv", row.names=1,header=T)
 ps_BC = phyloseq(otu_table(as.matrix(otu_BC), taxa_are_rows=TRUE),tax_table(as.matrix(taxonomy)))
 
 ###############network by phylum###############
@@ -196,8 +186,8 @@ s_t_BC<-distinct(s_t_BC)
 names(s_t_BC)<-'ID'
 nd_BC<-merge(s_t_BC, nodeG_BC,  by= 'ID' , all.x = TRUE )
 
-write.csv(edge_netClu_BC, 'microbial network\\edge_BC.csv', row.names = F)
-write.csv(nd_BC, 'microbial network\\node_BC.csv', row.names = F)
+write.csv(edge_netClu_BC, 'edge_BC.csv', row.names = F)
+write.csv(nd_BC, 'node_BC.csv', row.names = F)
 
 ##############zipi analysis################
 result_zipi_BC = corMicro (ps = ps_BC,
@@ -228,20 +218,10 @@ rdn_BC<-as.data.frame(rdn_BC)
 rdn_BC<-rownames_to_column(rdn_BC)
 colnames(rdn_BC)<-c('properties','BC_net','z_mean_BC','z_sd_BC')
 
-##############F_information################
-asv_total<-read.delim("microbial network\\F_otuall.txt")
-asv_total$Phylum<-gsub('p__','',asv_total$Phylum)
-asv_total$Class<-gsub('c__','',asv_total$Class)
-asv_total$Order<-gsub('o__','',asv_total$Order)
-asv_total$Family<-gsub('f__','',asv_total$Family)
-asv_total$Genus<-gsub('g__','',asv_total$Genus)
-asv_total$Species<-gsub('s__','',asv_total$Species)
-write.csv(asv_total,file='microbial network\\F_otu.csv')
-
-taxonomy = read.csv("microbial network\\F_tax.csv", row.names=1,header=T)
-
+##############Fungi################
 ##############F_M################
-otu_FM = read.csv("microbial network\\F_M.csv", row.names=1,header=T)
+taxonomy = read.csv("F_tax.csv", row.names=1,header=T)
+otu_FM = read.csv("F_M.csv", row.names=1,header=T)
 ps_FM = phyloseq(otu_table(as.matrix(otu_FM), taxa_are_rows=TRUE),tax_table(as.matrix(taxonomy)))
 
 ###############network by phylum###############
@@ -281,8 +261,8 @@ s_t_FM<-distinct(s_t_FM)
 names(s_t_FM)<-'ID'
 nd_FM<-merge(s_t_FM, nodeG_FM,  by= 'ID' , all.x = TRUE )
 
-write.csv(edge_netClu_FM, 'microbial network\\edge_FM.csv', row.names = F)
-write.csv(nd_FM, 'microbial network\\node_FM.csv', row.names = F)
+write.csv(edge_netClu_FM, 'edge_FM.csv', row.names = F)
+write.csv(nd_FM, 'node_FM.csv', row.names = F)
 
 ##############zipi anlysis################
 result_zipi_FM = corMicro (ps = ps_FM,
@@ -314,7 +294,7 @@ rdn_FM<-rownames_to_column(rdn_FM)
 colnames(rdn_FM)<-c('properties','FM_net','z_mean_FM','z_sd_FM')
 
 ##############F_C################
-otu_FC = read.csv("microbial network\\B_C.csv", row.names=1,header=T)
+otu_FC = read.csv("B_C.csv", row.names=1,header=T)
 ps_FC = phyloseq(otu_table(as.matrix(otu_FC), taxa_are_rows=TRUE),tax_table(as.matrix(taxonomy)))
 
 ###############network by phylum###############
@@ -354,8 +334,8 @@ s_t_FC<-distinct(s_t_FC)
 names(s_t_FC)<-'ID'
 nd_FC<-merge(s_t_FC, nodeG_FC,  by= 'ID' , all.x = TRUE )
 
-write.csv(edge_netClu_FC, 'microbial network\\edge_FC.csv', row.names = F)
-write.csv(nd_FC, 'microbial network\\node_FC.csv', row.names = F)
+write.csv(edge_netClu_FC, 'edge_FC.csv', row.names = F)
+write.csv(nd_FC, 'node_FC.csv', row.names = F)
 
 ##############zipi anlysis################
 result_zipi_FC = corMicro (ps = ps_FC,
@@ -386,13 +366,6 @@ rdn_FC<-as.data.frame(rdn_FC)
 rdn_FC<-rownames_to_column(rdn_FC)
 colnames(rdn_FC)<-c('properties','FC_net','z_mean_FC','z_sd_FC')
 
-############picture############
-############zipi############
-zipi_all<-cowplot::plot_grid( zipi_BM_p, zipi_BC_p , zipi_FM_p , zipi_FC_p ,nrow=2)
-pdf("microbial network\\zipi.pdf",width = 12,height = 8,family="GB1")
-zipi_all
-dev.off()
-
 ############complexity############
 multimerge<-function(dat=list(),...){
   if(length(dat)<2)return(as.data.frame(dat))
@@ -406,4 +379,147 @@ multimerge<-function(dat=list(),...){
 mul_mg<-multimerge(list(rdn_BM,rdn_BC,rdn_FM,rdn_FC))
 write.csv(mul_mg,"microbial network\\mul_mg.csv")
 
+############stability############
+library(patchwork)
+library(tidyverse)
+library(pulsar)
+##############Bacteria################
+medata = read.csv("group.csv",header = T, row.names=1)
+otutab = read.csv("Botu.csv",header = T, row.names=1)
+taxonomy = read.csv("B_tax.csv",header = T, row.names=1)
 
+ps = phyloseq(sample_data(medata),
+              otu_table(as.matrix(otutab), taxa_are_rows=TRUE),
+              tax_table(as.matrix(taxonomy)))
+
+tab.r = network.pip(
+  ps = ps,
+  N = 300,
+  layout_net = "model_maptree2",
+  r.threshold = 0.60,
+  p.threshold = 0.01,
+  method = "spearman",
+  clu_method = "cluster_fast_greedy")
+dat = tab.r[[2]]
+cortab = dat$net.cor.matrix$cortab 
+
+##############robustness################
+##robustness1
+res_rn <- Robustness.Targeted.removal(ps = ps,
+                                      corg = cortab,
+                                      degree = TRUE,
+                                      zipi = FALSE)
+res_rn_data <- res_rn[[2]]
+
+p_rn = ggplot(res_rn_data[res_rn_data$weighted == "unweighted", ], aes(x = Number.hub.removed, 
+                                                                       y = remain.mean, color = Group)) + 
+  geom_line()+ 
+  geom_pointrange(aes(ymin = remain.mean - remain.sd, 
+                      ymax = remain.mean + remain.sd), size = 0.2) + 
+  xlab("Proportion of species removed") + 
+  ylab("Proportion of species remained")+theme_classic()+
+  theme(panel.background = element_rect(color='black'))
+
+##robustness2
+res_rn2 = Robustness.Random.removal(ps = ps,
+                                    corg = cortab,
+                                    Top = 0)
+res_rn_data2 = res_rn2[[2]]
+
+p_rn2 = ggplot(res_rn_data2[res_rn_data2$weighted == "unweighted", ], aes(x = Proportion.removed, 
+                                                                          y = remain.mean, color = Group)) + 
+  geom_line()+
+  geom_pointrange(aes(ymin = remain.mean - remain.sd, 
+                      ymax = remain.mean + remain.sd), size = 0.2) + 
+  xlab("Proportion of species removed") + 
+  ylab("Proportion of species remained")+theme_classic()+
+  theme(panel.background = element_rect(color='black'))
+
+##############survivability################
+res_kh = natural.con.microp (
+  ps = ps,
+  corg = cortab,
+  norm = TRUE,
+  end = 200,
+  start = 0)
+
+res_kh_data = res_kh[[2]]
+
+p_kh = ggplot(res_kh_data, aes(Num.of.remove.nodes, Natural.connectivity, 
+                               color = Group)) + geom_point(alpha = 0.1) + 
+  geom_smooth(level = F) + 
+  theme_set(theme_bw(base_size = 25)) + theme(panel.grid.major = element_blank(), 
+                                              panel.grid.minor = element_blank(), axis.text = element_text(colour = "black")) + 
+  theme_classic()+
+  theme(panel.background = element_rect(color='black'))
+
+
+##############Fungi################
+medata = read.csv("group.csv",header = T, row.names=1)
+otutab = read.csv("Fotu.csv",header = T, row.names=1)
+taxonomy = read.csv("F_tax.csv",header = T, row.names=1)
+
+ps = phyloseq(sample_data(medata),
+              otu_table(as.matrix(otutab), taxa_are_rows=TRUE),
+              tax_table(as.matrix(taxonomy)))
+
+tab.r = network.pip(
+  ps = ps,
+  N = 300,
+  layout_net = "model_maptree2",
+  r.threshold = 0.60,
+  p.threshold = 0.01,
+  method = "spearman",
+  clu_method = "cluster_fast_greedy")
+dat = tab.r[[2]]
+cortab = dat$net.cor.matrix$cortab 
+
+##############robustness################
+##robustness1
+res_rn <- Robustness.Targeted.removal(ps = ps,
+                                      corg = cortab,
+                                      degree = TRUE,
+                                      zipi = FALSE)
+res_rn_data <- res_rn[[2]]
+
+p_rn = ggplot(res_rn_data[res_rn_data$weighted == "unweighted", ], aes(x = Number.hub.removed, 
+                                                                       y = remain.mean, color = Group)) + 
+  geom_line()+ 
+  geom_pointrange(aes(ymin = remain.mean - remain.sd, 
+                      ymax = remain.mean + remain.sd), size = 0.2) + 
+  xlab("Proportion of species removed") + 
+  ylab("Proportion of species remained")+theme_classic()+
+  theme(panel.background = element_rect(color='black'))
+
+##robustness2
+res_rn2 = Robustness.Random.removal(ps = ps,
+                                    corg = cortab,
+                                    Top = 0)
+res_rn_data2 = res_rn2[[2]]
+
+p_rn2 = ggplot(res_rn_data2[res_rn_data2$weighted == "unweighted", ], aes(x = Proportion.removed, 
+                                                                          y = remain.mean, color = Group)) + 
+  geom_line()+
+  geom_pointrange(aes(ymin = remain.mean - remain.sd, 
+                      ymax = remain.mean + remain.sd), size = 0.2) + 
+  xlab("Proportion of species removed") + 
+  ylab("Proportion of species remained")+theme_classic()+
+  theme(panel.background = element_rect(color='black'))
+
+##############survivability################
+res_kh = natural.con.microp (
+  ps = ps,
+  corg = cortab,
+  norm = TRUE,
+  end = 200,
+  start = 0)
+
+res_kh_data = res_kh[[2]]
+
+p_kh = ggplot(res_kh_data, aes(Num.of.remove.nodes, Natural.connectivity, 
+                               color = Group)) + geom_point(alpha = 0.1) + 
+  geom_smooth(level = F) + 
+  theme_set(theme_bw(base_size = 25)) + theme(panel.grid.major = element_blank(), 
+                                              panel.grid.minor = element_blank(), axis.text = element_text(colour = "black")) + 
+  theme_classic()+
+  theme(panel.background = element_rect(color='black'))
