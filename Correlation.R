@@ -1,12 +1,13 @@
-############Correlation############
+############Packages############
 library(ggplot2)
 library(corrplot)
 library(Hmisc)
 library(dplyr)
 library(igraph)
 library(linkET)
+############Correlation############
 ##Probiotic correlation
-b<-read.csv("Correlation\\Probiotic correlation.csv", row.names = 1)
+b<-read.csv("Probiotic correlation.csv", row.names = 1)
 
 b1<-cor(b)
 b2<-b1[1:6,7:13]
@@ -23,9 +24,9 @@ p_b<-corrplot(b2,is.corr = FALSE,method = "color",
 
 ############Mantel analysis############
 ############Bacteria############
-soi<-read.csv("Correlation//Soil.csv", row.names = 1)
+soi<-read.csv("Soil.csv", row.names = 1)
 cor<-rcorr(as.matrix(soi), type = "pearson")
-data1<-read.csv("Correlation//Bment.csv", row.names = 1)
+data1<-read.csv("Bment.csv", row.names = 1)
 
 mantel <- mantel_test(data1, soi,
                       spec_select = list(Keystone = 1:12,
@@ -60,7 +61,7 @@ P_bment<-qcorrplot(cor, type = "upper", show.diag =FALSE,
 
 
 ############Fungi############
-data2<-read.csv("Correlation//Fment.csv", row.names = 1)
+data2<-read.csv("Fment.csv", row.names = 1)
 
 mantel <- mantel_test(data2, soi,
                       spec_select = list(Keystone = 1:7,
@@ -93,7 +94,4 @@ P_fment<-qcorrplot(cor, type = "upper", show.diag =FALSE,
          colour = guide_legend(title = "Mantel's p", order = 2),
          size = guide_legend(title = "Mantel's r", order = 3),
          linetype = guide_legend("", order = 4))
-
-
-
 
