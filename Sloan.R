@@ -34,7 +34,7 @@ sloan<-function(df){
   return(sloan_label)}
 
 ############SCB############
-data_SCB<- read.csv('Sloan\\SCB.csv', row.names = 1)
+data_SCB<- read.csv('SCB.csv', row.names = 1)
 data_SCB<-t(data_SCB)
 
 ##picture
@@ -62,7 +62,7 @@ p_SCB<-ggplot() +
   xlab("log10(mean relative abundance)")+ylab("Occurrence frequency")
 
 ############SMB############
-data_SMB<- read.csv('Sloan\\SMB.csv', row.names = 1)
+data_SMB<- read.csv('SMB.csv', row.names = 1)
 data_SMB<-t(data_SMB)
 
 ##picture
@@ -90,7 +90,7 @@ p_SMB<-ggplot() +
   xlab("log10(mean relative abundance)")+ylab("Occurrence frequency")
 
 ############SCF############
-data_SCF<- read.csv('Sloan\\SCF.csv', row.names = 1)
+data_SCF<- read.csv('SCF.csv', row.names = 1)
 data_SCF<-t(data_SCF)
 
 ##picture
@@ -118,7 +118,7 @@ p_SCF<-ggplot() +
   xlab("log10(mean relative abundance)")+ylab("Occurrence frequency")
 
 ############SMF############
-data_SMF<- read.csv('Sloan\\SMF.csv', row.names = 1)
+data_SMF<- read.csv('SMF.csv', row.names = 1)
 data_SMF<-t(data_SMF)
 
 ##picture
