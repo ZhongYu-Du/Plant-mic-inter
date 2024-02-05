@@ -1,5 +1,4 @@
 ###################Packages#################
-
 library(psych)
 library(reshape2)
 library(ggplot2) 
@@ -8,7 +7,7 @@ library(patchwork)
 library(vegan)
 
 ###################CSF#################
-myro <- as.data.frame(read.csv("random forest\\CSF.csv", header=TRUE,row.names = 1))
+myro <- as.data.frame(read.csv("CSF.csv", header=TRUE,row.names = 1))
 spearman <- corr.test(myro[,1:8], myro[,9:13], method = 'spearman', adjust = 'none')
 
 r <- data.frame(spearman$r)  
@@ -47,9 +46,9 @@ colnames(IMportance_t) <- c("Ascomycota", "Basidiomycota", "Mortierellomycota",
 rownames(IMportance_t) <- c("pH", "AK", "TAs","SMC","ASb","TSb","DOC","AP")
 IMportance_t[IMportance_t<0] <- 0
 IMportance_t[is.na(IMportance_t)] <- 0
-write.csv(IMportance_t,file = "random forest\\IMportance_t1.CSV")
+write.csv(IMportance_t,file = "IMportance_t1.CSV")
 
-impdata <- read.csv("random forest\\IMportance_t1.CSV",header = TRUE) 
+impdata <- read.csv("IMportance_t1.CSV",header = TRUE) 
 measure_name=setdiff(colnames(impdata),c('Items'))
 
 data1=melt(impdata,           
@@ -62,7 +61,7 @@ p1 <- p+geom_point(data = data1, aes(x = sample, y = Items, size = expr*10), sha
   scale_size_continuous(range = c(0,10)) + 
   labs(size = 'Importance (%)')
 
-exp <- read.csv("random forest\\exp.CSV",header = TRUE)
+exp <- read.csv("exp.CSV",header = TRUE)
 
 exp$OTUs <- factor(exp$OTUs, levels = c("Ascomycota", "Basidiomycota", "Mortierellomycota",
                                                   "unclassified","Rozellomycota"))
@@ -100,7 +99,7 @@ p2/p1|p2/p3
 
 
 ###################CSB#################
-myro <- as.data.frame(read.csv("random forest\\CSB.csv", header=TRUE,row.names = 1))
+myro <- as.data.frame(read.csv("CSB.csv", header=TRUE,row.names = 1))
 spearman <- corr.test(myro[,1:8], myro[,9:13], method = 'spearman', adjust = 'none')
 
 r <- data.frame(spearman$r)  
@@ -139,9 +138,9 @@ colnames(IMportance_t) <- c("Ascomycota", "Basidiomycota", "Mortierellomycota",
 rownames(IMportance_t) <- c("pH", "AK", "TAs","SMC","ASb","TSb","DOC","AP")
 IMportance_t[IMportance_t<0] <- 0
 IMportance_t[is.na(IMportance_t)] <- 0
-write.csv(IMportance_t,file = "random forest\\IMportance_t1.CSV")
+write.csv(IMportance_t,file = "IMportance_t1.CSV")
 
-impdata <- read.csv("random forest\\IMportance_t1.CSV",header = TRUE) 
+impdata <- read.csv("IMportance_t1.CSV",header = TRUE) 
 measure_name=setdiff(colnames(impdata),c('Items'))
 
 data1=melt(impdata,           
@@ -154,7 +153,7 @@ p1 <- p+geom_point(data = data1, aes(x = sample, y = Items, size = expr*10), sha
   scale_size_continuous(range = c(0,10)) + 
   labs(size = 'Importance (%)')
 
-exp <- read.csv("random forest\\exp.CSV",header = TRUE)
+exp <- read.csv("exp.CSV",header = TRUE)
 
 exp$OTUs <- factor(exp$OTUs, levels = c("Ascomycota", "Basidiomycota", "Mortierellomycota",
                                         "unclassified","Rozellomycota"))
